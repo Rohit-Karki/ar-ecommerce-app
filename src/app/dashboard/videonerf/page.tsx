@@ -49,7 +49,7 @@ export default function Component() {
           </div>
         </div>
       </header>
-      {/* <Alert
+      {/* <Alert+
         variant="destructive"
         className="m-4 border-red-900/50 bg-red-900/10"
       >

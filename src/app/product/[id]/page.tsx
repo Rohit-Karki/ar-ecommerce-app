@@ -15,8 +15,7 @@ const products = [
     id: 1,
     name: "Luxe Lounge Chair",
     price: 1299.99,
-    image:
-      "/chair.png?height=600&width=600",
+    image: "/chair.png?height=600&width=600",
     model: "/chair.glb",
     rating: 4.8,
     reviews: 124,
@@ -41,9 +40,14 @@ const products = [
   },
 ];
 
-export default function ProductPage({ params }: { params: { id: string } }) {
+export default function ProductPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const [showAR, setShowAR] = useState(false);
-  const product = products.find((p) => p.id === parseInt(params.id));
+  const {id} = React.use(params)
+  const product = products.find((p) => p.id === parseInt(id));
 
   useEffect(() => {
     const script = document.createElement("script");

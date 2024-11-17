@@ -5,7 +5,7 @@ import { ArrowRight, Star } from 'lucide-react'
 
 const products = [
   { id: 1, name: 'Luxe Lounge Chair', price: 1299.99, image: '/chair.png', rating: 4.8 },
-  { id: 2, name: 'Elegant Dining Table', price: 2499.99, image: '/elegant_table.jpg', rating: 4.9 },
+  { id: 2, name: 'Elegant Mixture', price: 2499.99, image: '/elegant_table.jpg', rating: 4.9 },
   { id: 3, name: 'Sofa', price: 399.99, image: "/sofa.png", rating: 4.7 },
   { id: 4, name: 'Plush Area Rug', price: 799.99, image: '/rag.jpg', rating: 4.6 },
 ]

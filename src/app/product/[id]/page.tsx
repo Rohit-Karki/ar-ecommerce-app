@@ -1,12 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from 'next/image'
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, ShoppingCart, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
+import {
+  Star,
+  ShoppingCart,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 
 const ARViewer = dynamic(() => import("@/components/ARViewer"), { ssr: false });
@@ -16,16 +22,22 @@ const products = [
     id: 1,
     name: "Luxe Lounge Chair",
     price: 1299.99,
-    images: ["/chair.png?height=600&width=600", "/chair.png?height=600&width=600"],
+    images: [
+      "/chair.png?height=600&width=600",
+      "/chair.png?height=600&width=600",
+    ],
     model: "/chair.glb",
     rating: 4.8,
     reviews: 124,
   },
   {
     id: 2,
-    name: "Elegant Dining Table",
+    name: "Elegant Grinder",
     price: 2499.99,
-    images: ["/coffee_grinder.png?height=600&width=600", "/coffee_grinder.png?height=600&width=600",],
+    images: [
+      "/coffee_grinder.png?height=600&width=600",
+      "/coffee_grinder.png?height=600&width=600",
+    ],
     model: "/coffee_grinder.glb",
     rating: 4.9,
     reviews: 89,
@@ -33,8 +45,8 @@ const products = [
   {
     id: 3,
     name: "Sofa",
-    price: 39999.99,    
-    images: ["/sofa.png?height=600&width=600"],  
+    price: 39999.99,
+    images: ["/sofa.png?height=600&width=600"],
     model: "/sofa.glb",
     rating: 4.7,
     reviews: 56,
@@ -46,16 +58,20 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const { id } = React.use(params);
   const product = products.find((p) => p.id === parseInt(id));
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.images.length)
-  }
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex + 1) % product.images.length
+    );
+  };
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + product.images.length) % product.images.length)
-  }
-
+    setCurrentImageIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + product.images.length) % product.images.length
+    );
+  };
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -79,25 +95,25 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <Card>
           <CardContent className="p-0">
             <div className="relative">
-              <Image 
-                src={product.images[currentImageIndex]} 
-                alt={`${product.name} - Image ${currentImageIndex + 1}`} 
-                width={600} 
-                height={600} 
+              <Image
+                src={product.images[currentImageIndex]}
+                alt={`${product.name} - Image ${currentImageIndex + 1}`}
+                width={600}
+                height={600}
                 className="w-full h-auto object-cover rounded-t-lg"
               />
-              <Button 
-                variant="outline" 
-                size="icon" 
+              <Button
+                variant="outline"
+                size="icon"
                 className="absolute left-2 top-1/2 transform -translate-y-1/2"
                 onClick={prevImage}
               >
                 <ChevronLeft className="h-4 w-4" />
                 <span className="sr-only">Previous image</span>
               </Button>
-              <Button 
-                variant="outline" 
-                size="icon" 
+              <Button
+                variant="outline"
+                size="icon"
                 className="absolute right-2 top-1/2 transform -translate-y-1/2"
                 onClick={nextImage}
               >
@@ -111,14 +127,16 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
                   className={`w-16 h-16 border-2 rounded-md overflow-hidden ${
-                    index === currentImageIndex ? 'border-primary' : 'border-transparent'
+                    index === currentImageIndex
+                      ? "border-primary"
+                      : "border-transparent"
                   }`}
                 >
-                  <Image 
-                    src={image} 
-                    alt={`${product.name} - Thumbnail ${index + 1}`} 
-                    width={64} 
-                    height={64} 
+                  <Image
+                    src={image}
+                    alt={`${product.name} - Thumbnail ${index + 1}`}
+                    width={64}
+                    height={64}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -138,25 +156,46 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="flex items-center mb-4">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
+                <Star
+                  key={i}
+                  className={`w-5 h-5 ${
+                    i < Math.floor(product.rating)
+                      ? "text-yellow-400 fill-current"
+                      : "text-gray-300"
+                  }`}
+                />
               ))}
             </div>
-            <span className="ml-2 text-sm text-gray-600">{product.rating} ({product.reviews} reviews)</span>
+            <span className="ml-2 text-sm text-gray-600">
+              {product.rating} ({product.reviews} reviews)
+            </span>
           </div>
-          <p className="text-3xl font-bold text-primary">${product.price.toFixed(2)}</p>
+          <p className="text-3xl font-bold text-primary">
+            ${product.price.toFixed(2)}
+          </p>
         </div>
         <div className="space-y-4">
           <Button className="w-full" size="lg">
             <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
           </Button>
-          <Button variant="outline" className="w-full" size="lg" onClick={() => setShowAR(!showAR)}>
-            <Eye className="mr-2 h-5 w-5" /> {showAR ? 'Hide AR View' : 'View in AR'}
+          <Button
+            variant="outline"
+            className="w-full"
+            size="lg"
+            onClick={() => setShowAR(!showAR)}
+          >
+            <Eye className="mr-2 h-5 w-5" />{" "}
+            {showAR ? "Hide AR View" : "View in AR"}
           </Button>
         </div>
         <Tabs defaultValue="description">
           <TabsList className="w-full">
-            <TabsTrigger value="description" className="flex-1">Description</TabsTrigger>
-            <TabsTrigger value="specifications" className="flex-1">Specifications</TabsTrigger>
+            <TabsTrigger value="description" className="flex-1">
+              Description
+            </TabsTrigger>
+            <TabsTrigger value="specifications" className="flex-1">
+              Specifications
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="description" className="mt-4">
             <p className="text-gray-600">{product.description}</p>
@@ -172,5 +211,5 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }
